@@ -1,0 +1,278 @@
+from tkinter import *
+import time
+import threading
+#import requests
+
+def Cycl():
+    print('tryryr')
+
+def Return(event):
+    root3.destroy()
+
+def Example(event):
+    global root3
+    root3 = Tk()
+    root3.minsize(220, 280)
+    root3.maxsize(220, 280)
+    root3['bg'] = '#E3C8F9'
+    label11 = Label(root3,
+    text = 'Example of rest',
+    height = 1,
+    width = 25,
+    font = 'Italic 13',
+    bg = '#CE8FFF')
+    label12 = Label(root3,
+    text = 'Dream',
+    height = 1,
+    width = 22,
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+    label13 = Label(root3,
+    text = ' ',
+    height = 10,
+    width = 22,
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+    button4 = Button(root3,
+    text = 'Return',
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+    
+    label11.place(relx='0', rely='0')
+    label12.place(relx='0.088', rely='0.13')
+    label13.place(relx='0.088', rely='0.23')
+    button4.place(relx='0.15', rely='0.87', width = 156)
+    button4.bind('<Button-1>', Return)
+    root3.mainloop()
+
+
+
+def RestWork():
+    global Rentry2
+    print(Rentry2)
+    
+    global rest
+    global root1
+    global root2
+    
+    root2 = Tk()
+    rest = Rentry2
+    
+    cc = Canvas(root2, width=220, height=280,
+    bg='#E3C8F9', highlightbackground="#E3C8F9", highlightcolor="#E3C8F9")
+    cc.focus_set()
+    root2.minsize(220, 280)
+    root2.maxsize(220, 280)
+    root2['bg'] = '#E3C8F9'
+    label8 = Label(root2,
+    text = 'Timer',
+    height = 1,
+    width = 17,
+    font = 'Italic 17',
+    bg = '#CE8FFF')
+    label9 = Label(root2,
+    text = 'Rest time',
+    height = 1,
+    width = 16,
+    font = 'Italic 10',
+    bg = '#E3C8F9')
+    circle =cc.create_oval(10,10,150,150, outline="#CE8FFF",
+    fill="#DAAAFF", width=2)
+    label_10 = Label(root2,
+    text = rest,
+    height = 1,
+    width = 5,
+    font = 'Italic 21',
+    bg = "#DAAAFF",
+    fg = 'black')
+    label10 = Label(root2,
+    text = 'Example of rest',
+    height = 1,
+    width = 16,
+    font = 'Italic 10',
+    bg = '#E3C8F9')
+    
+    button3 = Button(root2,
+    text = 'Dream',
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+    
+    label8.place(relx='0', rely='0')
+    label9.place(relx='0.213', rely='0.13')
+    cc.place(relx='0.15', rely='0.2')
+    label10.place(relx='0.21', rely='0.77')
+    button3.place(relx='0.17', rely='0.87', width = 156)
+    label_10.place(relx='0.326', rely='0.423')
+    
+    button3.bind('<Button-1>', Example)
+    
+    rest_2=float(rest) *60
+    
+    t2 = threading.Timer(rest_2, Cycl)
+    t2.start()
+    
+    root2.mainloop()
+    root1.destroy()
+
+def return_1(event):
+    root1.destroy()
+
+def destroy():
+    root.destroy()
+
+def WorkTimer(event):
+    Cycle3=entry3.get()
+    global Rentry2
+    global entry
+    global work
+    Rentry2 = entry2.get()
+    work = entry.get()
+    
+    a = threading.Timer(5, destroy)
+    a.start()
+    
+    global root1
+    root1 = Tk()
+    
+    c = Canvas(root1, width=220, height=280,
+    bg='#E3C8F9', highlightbackground="#E3C8F9", highlightcolor="#E3C8F9")
+    c.focus_set()
+    root1.minsize(220, 280)
+    root1.maxsize(220, 280)
+    root1['bg'] = '#E3C8F9'
+    label6 = Label(root1,
+    text = 'Timer',
+    height = 1,
+    width = 17,
+    font = 'Italic 17',
+    bg = '#CE8FFF')
+    label7 = Label(root1,
+    text = 'Work time',
+    height = 1,
+    width = 16,
+    font = 'Italic 10',
+    bg = '#E3C8F9')
+    circle =c.create_oval(10,10,150,150, outline="#CE8FFF",
+    fill="#DAAAFF", width=2)
+    label_7 = Label(root1,
+    text = work,
+    height = 1,
+    width = 5,
+    font = 'Italic 21',
+    bg = "#DAAAFF",
+    fg = 'black')
+    button2 = Button(root1,
+    text = 'Return',
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+    
+    label6.place(relx='0', rely='0')
+    label7.place(relx='0.213', rely='0.13')
+    c.place(relx='0.15', rely='0.2')
+    button2.place(relx='0.15', rely='0.87', width = 156)
+    label_7.place(relx='0.326', rely='0.423')
+    button2.bind('<Button-1>', return_1)
+    
+    work_2=float(work) *60
+    
+    t = threading.Timer(work_2, RestWork)
+    t.start()
+    
+    root1.mainloop()
+
+root = Tk()
+root.minsize(220, 280)
+root.maxsize(220, 280)
+root['bg'] = '#E3C8F9'
+global entry2
+global Rentry2
+global entry3
+global Cycle3
+label = Label(root,
+text = 'Work timer',
+height = 1,
+width = 17,
+font = 'Italic 17',
+bg = '#CE8FFF')
+label2 = Label(root,
+text = 'Job selection',
+height = 1,
+width = 16,
+font = 'Italic 13',
+bg = '#DAAAFF')
+radiobutton_value = IntVar()
+radiobutton = Radiobutton(root,
+ 
+text='Computer work',
+bg = '#DAAAFF',
+font = 'Italic 10',
+variable =radiobutton_value,
+value = 0)
+radiobutton2 = Radiobutton(root,
+text='Physical work',
+bg = '#DAAAFF',
+font = 'Italic 10',
+variable=radiobutton_value,
+value = 1)
+radiobutton3 = Radiobutton(root,
+text='Intellectual work',
+bg = '#DAAAFF',
+font = 'Italic 10',
+variable =radiobutton_value,
+value = 2)
+label3 = Label(root,
+text = 'Work time',
+height = 1,
+width = 8,
+font = 'Italic 10',
+bg = '#E3C8F9')
+label4 = Label(root,
+text = 'Rest time',
+height = 1,
+width = 8,
+font = 'Italic 10',
+bg = '#E3C8F9')
+
+entry = Entry (root,
+bg = '#DAAAFF',
+width = 9)
+
+entry2 = Entry (root,
+bg = '#DAAAFF',
+width = 9)
+
+
+
+label5 = Label(root,
+text ='Cycles',
+height = 1,
+width = 8,
+font = 'Italic 10',
+bg = '#E3C8F9')
+entry3 = Entry (root,
+bg = '#DAAAFF',
+width = 9)
+button = Button(root,
+text = 'Start',
+font = 'Italic 10',
+bg = '#CE8FFF')
+
+
+
+
+button.bind('<Button-1>', WorkTimer)
+
+label.place(relx='0', rely='0')
+label2.place(relx='0.15', rely='0.13')
+radiobutton.place(relx='0.15', rely='0.215', width = 150)
+radiobutton2.place(relx='0.15', rely='0.3', width = 150)
+radiobutton3.place(relx='0.15', rely='0.38', width = 150)
+label3.place(relx='0.10', rely='0.5')
+label4.place(relx='0.58', rely='0.5')
+entry.place(relx='0.124', rely='0.6')
+entry2.place(relx='0.61', rely='0.6')
+label5.place(relx='0.336', rely='0.67')
+entry3.place(relx='0.37', rely='0.78')
+button.place(relx='0.15', rely='0.87', width = 156)
+
+root.mainloop()
