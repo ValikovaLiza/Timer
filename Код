@@ -3,8 +3,54 @@ import time
 import threading
 #import requests
 
+from tkinter import *
+import threading
+#import requests
+
+
+# предложение продолжить
+def Destroy(event):
+    root4.destroy()
+
+# создание окна продолжения
 def Cycl():
-    print('tryryr')
+    global root1
+    global root2
+    global root4
+
+
+
+    root4 = Tk()
+    root4.minsize(220, 280)
+    root4.maxsize(220, 280)
+    root4['bg'] = '#E3C8F9'
+    label0 = Label(root4,
+        text = 'Repeat?',
+        height = 1,
+        width = 12,
+        font = 'Italic 13',
+        bg = '#CE8FFF')
+    button0 = Button(root4,
+    text = 'Yes',
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+
+    button01 = Button(root4,
+    text = 'No ',
+    font = 'Italic 10',
+    bg = '#CE8FFF')
+
+    label0.place(relx='0.267', rely='0.10')
+    button0.place(relx='0.2557', rely='0.23')
+    button01.place(relx='0.623', rely='0.23')
+    button0.bind('<Button-1>', WorkTimer)
+    button01.bind('<Button-1>', Destroy)
+
+
+    root4.mainloop()
+
+    root1.destroy()
+    root2.destroy()
 
 def Return(event):
     root3.destroy()
@@ -22,27 +68,41 @@ def Example(event):
     font = 'Italic 13',
     bg = '#CE8FFF')
     label12 = Label(root3,
-    text = 'Dream',
+    text = name,
     height = 1,
     width = 22,
     font = 'Italic 10',
     bg = '#CE8FFF')
-    label13 = Label(root3,
-    text = ' ',
-    height = 10,
-    width = 22,
+
+    text = Text(root3,
+    width = 23,
     font = 'Italic 10',
-    bg = '#CE8FFF')
+    bg = '#CE8FFF',
+    relief="flat",
+    borderwidth=0,
+    #state="disabled"
+    )
+
+    text.insert('1.0' ,tet)
+
+
+    scroll = Scrollbar(root3,
+    command = text.yview)
+
+    text.configure(yscrollcommand = scroll.set)
+
     button4 = Button(root3,
     text = 'Return',
     font = 'Italic 10',
     bg = '#CE8FFF')
-    
+
     label11.place(relx='0', rely='0')
     label12.place(relx='0.088', rely='0.13')
-    label13.place(relx='0.088', rely='0.23')
+    text.place(relx='0.170', rely='0.23', height ='173')
+    scroll.place(relx='0.088', rely='0.23', height ='173', anchor='nw')
     button4.place(relx='0.15', rely='0.87', width = 156)
     button4.bind('<Button-1>', Return)
+
     root3.mainloop()
 
 
@@ -50,14 +110,25 @@ def Example(event):
 def RestWork():
     global Rentry2
     print(Rentry2)
-    
+    global name
+    global tet
+
     global rest
     global root1
     global root2
-    
+
+    if radiobutton_value.get() == 2:
+       name = 'Make your exersize'
+       tet = ' I should make it at home'
+    elif radiobutton_value.get() == 1:
+       name = 'Sleep'
+       tet = 'Sleep is a great way to relax and unwind. So find a comfortable sofa, a warm blanket, make yourself comfortable and sleep'
+    else:
+       name = 'Gymnastics for the eyes'
+       tet = 'To prevent your vision  from falling and to allow your     eyes to relax, you should   do eye gymnastics:           1.Rapid blinking with strong constriction of the eyelids. Open and close your eyes  through resistance. Repeat the steps 5-10 times.        2.Eights. Follow the movements with your eyes,drawing the number "8".                3.Verticals, contours,        diagonals and circles. Draw straight lines and other shapes. Keep your range of motion as wide as possible,but do not strain your eyes. 4. Pressure. Place your      index fingers on the brow   showers and lift them up.  Repeat the exercise 10-12  times.'
     root2 = Tk()
     rest = Rentry2
-    
+
     cc = Canvas(root2, width=220, height=280,
     bg='#E3C8F9', highlightbackground="#E3C8F9", highlightcolor="#E3C8F9")
     cc.focus_set()
@@ -91,28 +162,28 @@ def RestWork():
     width = 16,
     font = 'Italic 10',
     bg = '#E3C8F9')
-    
+
     button3 = Button(root2,
-    text = 'Dream',
+    text = name,
     font = 'Italic 10',
     bg = '#CE8FFF')
-    
+
     label8.place(relx='0', rely='0')
     label9.place(relx='0.213', rely='0.13')
     cc.place(relx='0.15', rely='0.2')
     label10.place(relx='0.21', rely='0.77')
     button3.place(relx='0.17', rely='0.87', width = 156)
     label_10.place(relx='0.326', rely='0.423')
-    
+
     button3.bind('<Button-1>', Example)
-    
+
     rest_2=float(rest) *60
-    
+
     t2 = threading.Timer(rest_2, Cycl)
     t2.start()
-    
+
     root2.mainloop()
-    root1.destroy()
+
 
 def return_1(event):
     root1.destroy()
@@ -121,19 +192,24 @@ def destroy():
     root.destroy()
 
 def WorkTimer(event):
-    Cycle3=entry3.get()
     global Rentry2
     global entry
     global work
-    Rentry2 = entry2.get()
-    work = entry.get()
-    
-    a = threading.Timer(5, destroy)
-    a.start()
-    
     global root1
+    global root2
+
+    if not bool(Rentry2):
+        Rentry2 = entry2.get()
+
+    if not bool(work):
+        work = entry.get()
+
+    #a = threading.Timer(5, destroy)
+    #a.start()
+
+
     root1 = Tk()
-    
+
     c = Canvas(root1, width=220, height=280,
     bg='#E3C8F9', highlightbackground="#E3C8F9", highlightcolor="#E3C8F9")
     c.focus_set()
@@ -165,29 +241,35 @@ def WorkTimer(event):
     text = 'Return',
     font = 'Italic 10',
     bg = '#CE8FFF')
-    
+
     label6.place(relx='0', rely='0')
     label7.place(relx='0.213', rely='0.13')
     c.place(relx='0.15', rely='0.2')
     button2.place(relx='0.15', rely='0.87', width = 156)
     label_7.place(relx='0.326', rely='0.423')
     button2.bind('<Button-1>', return_1)
-    
+
     work_2=float(work) *60
-    
+
     t = threading.Timer(work_2, RestWork)
     t.start()
-    
+
     root1.mainloop()
 
 root = Tk()
 root.minsize(220, 280)
 root.maxsize(220, 280)
 root['bg'] = '#E3C8F9'
+
+
 global entry2
 global Rentry2
-global entry3
-global Cycle3
+Rentry2 = 0
+work = 0
+root1 = 0
+root2 = 0
+
+
 label = Label(root,
 text = 'Work timer',
 height = 1,
@@ -202,7 +284,7 @@ font = 'Italic 13',
 bg = '#DAAAFF')
 radiobutton_value = IntVar()
 radiobutton = Radiobutton(root,
- 
+
 text='Computer work',
 bg = '#DAAAFF',
 font = 'Italic 10',
@@ -241,17 +323,6 @@ entry2 = Entry (root,
 bg = '#DAAAFF',
 width = 9)
 
-
-
-label5 = Label(root,
-text ='Cycles',
-height = 1,
-width = 8,
-font = 'Italic 10',
-bg = '#E3C8F9')
-entry3 = Entry (root,
-bg = '#DAAAFF',
-width = 9)
 button = Button(root,
 text = 'Start',
 font = 'Italic 10',
@@ -271,8 +342,6 @@ label3.place(relx='0.10', rely='0.5')
 label4.place(relx='0.58', rely='0.5')
 entry.place(relx='0.124', rely='0.6')
 entry2.place(relx='0.61', rely='0.6')
-label5.place(relx='0.336', rely='0.67')
-entry3.place(relx='0.37', rely='0.78')
 button.place(relx='0.15', rely='0.87', width = 156)
 
 root.mainloop()
